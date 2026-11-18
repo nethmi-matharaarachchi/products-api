@@ -51,4 +51,15 @@ public class ProductService {
                 .toList();
 
     }
+
+    //to make an endpoint to show all the summaries
+    public List<String> getAllSummaries(){
+
+        List<String> summaries = new ArrayList<>();
+
+        for (Product p : products){
+            summaries.add(p.getSummary());
+        }
+        return summaries;
+    }
 }

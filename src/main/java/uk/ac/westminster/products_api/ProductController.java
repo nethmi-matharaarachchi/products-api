@@ -1,6 +1,7 @@
 package uk.ac.westminster.products_api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +28,10 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product addProduct(@RequestBody Product product){
-        return productService.addProduct(product);
+    public Product addProduct(@RequestBody DigitalProduct product){
+        return productService.addProduct(product) ;//this part is not working- Jakson cannot build an abstarct class
+                                    //from JSON so the endpoint now is broken
+                                    //Using DigitalProduct until a proper fix
     }
     @DeleteMapping("/{id}")
     public void deleteProduct(@PathVariable Long id){
@@ -38,5 +41,10 @@ public class ProductController {
     @GetMapping ("/search")
     public List<Product> search (@RequestParam String name){
         return productService.findByName(name);
+    }
+
+    @GetMapping("/summaries")
+    public List<String> getSummaries(){
+        return productService.getAllSummaries();
     }
 }
